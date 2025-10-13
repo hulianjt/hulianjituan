@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互联+教程文档</title>
+    <style>
+
+video {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+
+
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* 字体设置 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            padding: 0;
+            margin: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        /* 容器 */
+        .container {
+            max-width: 100%;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+        
+        /* 头部 */
+        header {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            border-bottom: 1px solid #e1e4e8;
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* 刷新按钮 */
+        .refresh-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .meta {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        /* 导航 */
+        .toc {
+            background-color: #f1f3f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .toc h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+        }
+        
+        .toc li {
+            margin-bottom: 8px;
+        }
+        
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 主要内容 */
+        .content {
+            padding: 20px 0;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin: 25px 0 15px;
+            color: #2c3e50;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            margin: 20px 0 10px;
+            color: #2c3e50;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        /* 代码块 */
+        pre {
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            background-color: #f8f8f8;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+        
+        /* 图片 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px auto;
+            border-radius: 5px;
+        }
+        
+        /* 列表 */
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        /* 表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            overflow-x: auto;
+            display: block;
+        }
+        
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        /* 提示框 */
+        .note {
+            background-color: #e7f5ff;
+            border-left: 4px solid #4dabf7;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .warning {
+            background-color: #fff3bf;
+            border-left: 4px solid #ffd43b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .danger {
+            background-color: #ffecf1;
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        /* 响应式调整 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 750px;
+                padding: 0 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+            
+            .toc {
+                float: right;
+                width: 250px;
+                margin: 20px 0 20px 20px;
+            }
+            
+            .content-with-toc {
+                margin-right: 270px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .container {
+                max-width: 970px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1170px;
+            }
+        }
+        
+        /* 暗色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: #e1e4e8;
+                background-color: #1a1a1a;
+            }
+            
+            header, footer {
+                background-color: #242424;
+                border-color: #444;
+            }
+            
+            h1, h2, h3 {
+                color: #f0f0f0;
+            }
+            
+            .toc {
+                background-color: #2d2d2d;
+            }
+            
+            .refresh-btn {
+                background-color: #4dabf7;
+            }
+            
+            .refresh-btn:hover {
+                background-color: #3b8fd9;
+            }
+            
+            pre, code {
+                background-color: #2d2d2d;
+                color: #f8f8f2;
+            }
+            
+            table th, table td {
+                border-color: #444;
+            }
+            
+            table th {
+                background-color: #2d2d2d;
+            }
+            
+            .note {
+                background-color: #1e3a5f;
+                border-left-color: #4dabf7;
+            }
+            
+            .warning {
+                background-color: #5c4a00;
+                border-left-color: #ffd43b;
+            }
+            
+            .danger {
+                background-color: #5c1a2a;
+                border-left-color: #ff6b6b;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="refresh-btn" onclick="window.location.reload()">↻</button>
+        <div class="container">
+            <div class="header-content">
+                <h1>互联+做单指引文档</h1>
+                <div class="meta">请点击左上角刷新按钮获取最新版本文档再阅读</div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="toc">
+            <h2>目录</h2>
+            <ul>
+                <li><a href="#section1">第一部分：收益构成</a></li>
+                <li><a href="#section2">第二部分：准备工作</a></li>
+                <li><a href="#section3">第三部分：开工/结算</a></li>
+                <li><a href="#section4">第四部分：推荐结算方式</a></li>
+                
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 id="section1">第一部分：收益</h2>
+            <p>欢迎阅读本教程文档。本教程将引导您完成从新手到盖章小王子的学习过程。</p>
+            
+            <h3>收益构成</h3>
+            <p>以我是做单人员为例，我的代号为孤狼，举个栗子</p>
+            <ul>
+                <li>一个坑位盖2个章可获得佣金1元，一个坑的意思指（一个大便池）注意：两个小便池算一个坑</li>
+                <li>孤狼日*24小时盖了500个坑，那么他按工作流程交付工作视频/照片后，孤狼获得了佣金￥500R</li>
+                <li>孤狼的收入并没有限制，完全是多劳多得的佣金构成，看个人能力，当然，最低保底是要完成日200坑的，这是硬性规定</li>
+                <li>注意，孤狼所在地必须为市级单位，某某市区，市级以下单位是没有办法做单的，所以假如孤狼在某某县，那么很遗憾就没有办法与我方合作开展工作</li>
+            </ul>
+            
+            <div class="note">
+                <strong>警告：</strong> 如果您是做单人员，发现您的工价少于一元/坑，即是有人侵害了您的利益，请务必要通过主页公开邮箱进行举报，我方核实后将中断与被举报人员的合作
+            </div>
+            
+            <h2 id="section2">第二部分：开工前的准备</h2>
+            <p>在开工之前，请确保您已准备好以下物料（物料都是包邮免费的，请联系管理员你的LD获取）：</p>
+            
+            <h3>物料构成</h3>
+            <table>
+                <tr>
+                    <th>物料名</th>
+                    <th>物料规格</th>
+                    <th>获取</th>
+                </tr>
+                <tr>
+                    <td>印章</td>
+                    <td>2个光敏刻章40*60</td>
+                    <td>免费包邮</td>
+                </tr>
+                <tr>
+                    <td>印章内容</td>
+                    <td>xkb8.cc同城约炮100/zsh88.cc免费看片约炮</td>
+                    <td>核对内容√</td>
+                </tr>
+                <tr>
+                    <td>万能金属不灭印油</td>
+                    <td>颜色-黑色</td>
+                    <td>免费包邮</td>
+                </tr>
+                <tr>
+                    <td>记号笔</td>
+                    <td>颜色-黑色</td>
+                    <td>免费包邮</td>
+                </tr>
+            </table>
+            
+            <h3>准备完毕</h3>
+            <p>物料准备完毕并核对内容正确后我们的孤狼，盖章小王子就可以开始寻找厕所出发赚钱了</p>
+            <pre><code>! 注意
+做单人员是无须交取任何费用的，一旦有人向您收取费用，请及时举报！
+</code></pre>
+            
+            <h2 id="section3">第三部分：开工</h2>
+            <p>盖章<br>
+         1:开工视频：水印相机版本➡️测码➡️打开动动➡️环顾四周<br>
+         2:盖章视频：进去后打开水印相机对准门的下3分之2的位置盖章结束后出来➡️环顾四周<br>
+         3:完工视频：动动检查路线</p>
+            
+            <h4>参考视频</h4>
+            <p>请观看以下标准视频：</p>
+            <div class="video-container">
+        <h1>代号孤狼交付的标准视频👇</h1>
+        
+        <!-- 基本视频播放 -->
+        <video width="640" height="360" controls>
+            <source src="video_2025-10-13_19-31-43.mp4" type="video/mp4">
+            <source src="video_2025-10-13_19-31-43.mp4" type="video/webm">
+            您的浏览器不支持HTML5视频标签。
+        </video>
+        
+    </div>
+            <pre><code>请尽量一个视频包含更多的坑位，保持视频的连续完整性</code></pre>
+            
+            <h4>第二步：交付视频给管理员，等待结算薪水</h4>
+            <p>为了保证正常结算，工作流程一定要按照文档严格执行</p>
+            <pre><code>怎么结算：
+交单后24小时给你核单，没问题
+第二天24点前结算，支付宝微信Usdt都可以结算
+比如：1号交单最迟2号结账,推荐USDT结算</code></pre>
+            
+            <div class="warning">
+                <strong>注意：</strong> 结算薪水后请核对无误，除非交单视频作弊或不符合流程才会结算异常，如果有故意克扣请及时邮箱举报
+            </div>
+            
+            <h2 id="section4">第四部分：推荐薪水结算方式</h2>
+            <p>当然，这只是一个建议，建议优先使用USDT结算，原因你懂的！使用常见的微信，支付宝等会存在诸多风险提示及限制，如果没有条件使用USDT的，那么官方推荐使用小满商铺以下是小满商铺链接地址，需要结算的人员自行设置商品链接让结算方你的管理员下单购买，当然，你也可以继续使用微信/支付宝等常见的转账方式！</p>
+            
+            <h4>小满商铺地址</h4>
+            <p>编辑好商品设置好价格方便管理员下单付你薪水</p>
+            <pre><code>
+  https://shop.xiaoman.top
+</code></pre>
+            
+            <!-- <h3>插件扩展</h3>
+            <p>安装插件以扩展功能：</p>
+            <pre><code>tutorial plugin install advanced-features</code></pre>
+            
+            <div class="danger">
+                <strong>警告：</strong> 某些高级功能可能会影响系统稳定性，请谨慎使用。
+            </div>
+            
+            <h2 id="section5">第五部分：常见问题</h2>
+            <p>以下是一些常见问题及其解决方案。</p>
+            
+            <h3>问题1：安装失败</h3>
+            <p><strong>解决方案：</strong> 检查网络连接并确保有足够的存储空间。</p>
+            
+            <h3>问题2：运行错误</h3>
+            <p><strong>解决方案：</strong> 确保所有依赖项已正确安装。</p>
+            
+            <h3>问题3：性能问题</h3>
+            <p><strong>解决方案：</strong> 关闭不必要的插件或升级硬件配置。</p> -->
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 互联+地推印章团队教程文档， 祝大家一路顺风发发发！</p>
+            <p>如有问题，请发邮件-hulianjt@hotmail.com</p>
+        </div>
+    </footer>
+</body>
+</html>

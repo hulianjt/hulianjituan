@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互联+</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.5;
+            padding: 15px;
+        }
+
+        .app-container {
+            max-width: 100%;
+        }
+
+        /* 新版公告栏样式 - 简约版 */
+        .announcement-container {
+            background: white;
+            border-radius: 12px;
+            padding: 0;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .announcement-header {
+            background: #4a6cf7;
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .announcement-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .announcement-more {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+        }
+
+        .announcement-list {
+            list-style-type: none;
+        }
+
+        .announcement-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .announcement-item:last-child {
+            border-bottom: none;
+        }
+
+        .announcement-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .announcement-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 10px;
+            font-weight: 500;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .badge-important {
+            background-color: #ff4d4f;
+            color: white;
+        }
+
+        .badge-notice {
+            background-color: #faad14;
+            color: white;
+        }
+
+        .badge-normal {
+            background-color: #d9d9d9;
+            color: #666;
+        }
+
+        .announcement-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            flex: 1;
+        }
+
+        /* 排行榜样式 */
+        .ranking-container {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .ranking-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #333;
+        }
+
+        .ranking-title i {
+            color: #ffc107;
+            margin-right: 8px;
+        }
+
+        .refresh-btn {
+            color: #666;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .refresh-btn.refreshing {
+            animation: rotate 1s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            transition: all 0.2s;
+        }
+
+        .ranking-item:hover {
+            transform: translateX(5px);
+        }
+
+        .ranking-item.top1 {
+            background: linear-gradient(90deg, rgba(255,215,0,0.1) 0%, rgba(255,255,255,1) 100%);
+            border-left: 3px solid #ffc107;
+        }
+
+        .ranking-item.top2 {
+            background: linear-gradient(90deg, rgba(192,192,192,0.1) 0%, rgba(255,255,255,1) 100%);
+            border-left: 3px solid #c0c0c0;
+        }
+
+        .ranking-item.top3 {
+            background: linear-gradient(90deg, rgba(205,127,50,0.1) 0%, rgba(255,255,255,1) 100%);
+            border-left: 3px solid #cd7f32;
+        }
+
+        .rank {
+            font-weight: bold;
+            width: 24px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        .top1 .rank {
+            color: #ffc107;
+        }
+
+        .top2 .rank {
+            color: #c0c0c0;
+        }
+
+        .top3 .rank {
+            color: #cd7f32;
+        }
+
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: #6c757d;
+        }
+
+        .name {
+            flex: 1;
+            font-size: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .score {
+            font-weight: 600;
+            color: #ff6b6b;
+        }
+
+        /* 卡片导航样式 */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover, .card:active {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #4a6cf7;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* 密码弹窗样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .modal-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .modal-btn-confirm {
+            background: #4a6cf7;
+            color: white;
+        }
+
+        .modal-btn-cancel {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .modal-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* 响应式调整 */
+        @media (min-width: 768px) {
+            body {
+                display: flex;
+                justify-content: center;
+                padding: 30px;
+            }
+            
+            .app-container {
+                max-width: 500px;
+                width: 100%;
+            }
+            
+            .cards-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* 禁止选择文本 */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* 禁止拖拽图片 */
+        img {
+            -webkit-user-drag: none;
+            -moz-user-drag: none;
+            -ms-user-drag: none;
+            user-drag: none;
+        }
+
+        /* 安全提示样式 */
+        #securityAlert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ff4d4f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            z-index: 9999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 安全警告提示 -->
+    <div id="securityAlert">安全警告：禁止未经授权的访问！</div>
+
+    <div class="app-container">
+        <!-- 新版公告栏区域 - 简约版 -->
+        <div class="announcement-container">
+            <div class="announcement-header">
+                <h2 class="announcement-title">
+                    <i class="fas fa-bullhorn"></i> 互联+公告
+                </h2>
+                <span class="announcement-more">请认真阅读</span>
+            </div>
+            <ul class="announcement-list">
+                <li class="announcement-item">
+                    <span class="announcement-badge badge-important">重要</span>
+                    <span class="announcement-text">避免结账出错，自身利益受损，请所有管理员（用户）严格按照文档去开展工作，用户交单日不能低于200坑，200坑以下的请解除合作关系不要再提交了</span>
+                </li>
+                <li class="announcement-item">
+                    <span class="announcement-badge badge-notice">通知</span>
+                    <span class="announcement-text">所有做单人员的工价是【1元/2章/一坑/（两池算一坑）】低于此价格的邮箱举报-</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 排行榜区域 -->
+        <div class="ranking-container">
+            <h2 class="ranking-title">
+                <i class="fas fa-trophy"></i> 日坑排行榜
+                <span class="refresh-btn"><i class="fas fa-sync-alt"></i></span>
+            </h2>
+            <div class="ranking-list">
+                <div class="ranking-item top1">
+                    <span class="rank">1</span>
+                    <span class="avatar"><i class="fas fa-user"></i></span>
+                    <span class="name">待定</span>
+                    <span class="score">x单￥</span>
+                </div>
+                <div class="ranking-item top2">
+                    <span class="rank">2</span>
+                    <span class="avatar"><i class="fas fa-user"></i></span>
+                    <span class="name">待定</span>
+                    <span class="score">x单￥</span>
+                </div>
+                <div class="ranking-item top3">
+                    <span class="rank">3</span>
+                    <span class="avatar"><i class="fas fa-user"></i></span>
+                    <span class="name">待定</span>
+                    <span class="score">x单￥</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 卡片导航区域 -->
+        <div class="cards-container">
+            <div class="card" onclick="hardRefresh()">
+                <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
+                <div class="card-title">刷新同步</div>
+            </div>
+            <div class="card" onclick="showPasswordModal('docs')">
+                <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="card-title">做单文档</div>
+            </div>
+            <div class="card" onclick="navigate('ios')">
+                <div class="card-icon"><i class="fab fa-apple"></i></div>
+                <div class="card-title">IOS[做单必下]</div>
+            </div>
+            <div class="card" onclick="navigate('android')">
+                <div class="card-icon"><i class="fab fa-android"></i></div>
+                <div class="card-title">安卓[做单必下]</div>
+            </div>
+            <div class="card" onclick="navigate('plk')">
+                <div class="card-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <div class="card-title">交单PLK网盘</div>
+            </div>
+            <div class="card" onclick="navigate('help')">
+                <div class="card-icon"><i class="fas fa-question-circle"></i></div>
+                <div class="card-title">Londing</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 密码弹窗 -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="modal-content">
+            <h3 class="modal-title">请输入访问密码</h3>
+            <input type="password" class="password-input" id="passwordInput" placeholder="请输入密码">
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="hidePasswordModal()">取消</button>
+                <button class="modal-btn modal-btn-confirm" onclick="checkPassword()">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 密码设置 - 实际应用中应该使用更安全的存储方式
+        const DOCS_PASSWORD = "888"; // 默认密码，实际应用中应该从服务器获取或使用更安全的验证方式
+        
+        // 卡片链接配置 - 在这里设置每个卡片对应的链接
+        const CARD_LINKS = {
+            'docs': 'hljt.html',      // 做单文档链接
+            'ios': 'https://example.com/ios',        // IOS下载链接
+            'android': 'https://example.com/android',// 安卓下载链接
+            'plk': 'https://example.com/plk',        // PLK网盘链接
+            'help': 'https://example.com/help'       // 帮助中心链接
+        };
+
+        // 强制刷新页面并清除缓存
+        function hardRefresh() {
+            const refreshCard = document.querySelector('.card[onclick="hardRefresh()"] .card-icon');
+            refreshCard.classList.add('refreshing');
+            refreshCard.style.animation = 'rotate 1s linear infinite';
+            
+            setTimeout(() => {
+                try {
+                    window.location.reload(true);
+                } catch(e) {
+                    window.location.href = window.location.href.split('?')[0] + '?timestamp=' + new Date().getTime();
+                }
+            }, 800);
+        }
+
+        // 显示密码弹窗
+        function showPasswordModal(page) {
+            const modal = document.getElementById('passwordModal');
+            modal.dataset.page = page;
+            modal.classList.add('active');
+            document.getElementById('passwordInput').focus();
+        }
+
+        // 隐藏密码弹窗
+        function hidePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('active');
+            document.getElementById('passwordInput').value = '';
+        }
+
+        // 检查密码
+        function checkPassword() {
+            const modal = document.getElementById('passwordModal');
+            const inputPassword = document.getElementById('passwordInput').value;
+            const page = modal.dataset.page;
+            
+            if (inputPassword === DOCS_PASSWORD) {
+                hidePasswordModal();
+                navigate(page);
+            } else {
+                alert('密码错误，请重新输入！');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+
+        // 刷新排行榜功能
+        document.querySelector('.refresh-btn').addEventListener('click', function() {
+            const refreshBtn = this;
+            refreshBtn.classList.add('refreshing');
+            
+            setTimeout(() => {
+                refreshBtn.classList.remove('refreshing');
+                
+                const rankingItems = document.querySelectorAll('.ranking-item');
+                rankingItems.forEach(item => {
+                    const scoreElement = item.querySelector('.score');
+                    const currentScore = parseInt(scoreElement.textContent);
+                    const newScore = currentScore + Math.floor(Math.random() * 5) + 1;
+                    scoreElement.textContent = newScore + '单';
+                });
+                
+                const rankingList = document.querySelector('.ranking-list');
+                const items = Array.from(rankingList.children);
+                items.sort((a, b) => {
+                    const aScore = parseInt(a.querySelector('.score').textContent);
+                    const bScore = parseInt(b.querySelector('.score').textContent);
+                    return bScore - aScore;
+                });
+                
+                items.forEach((item, index) => {
+                    const rank = item.querySelector('.rank');
+                    rank.textContent = index + 1;
+                    
+                    item.className = 'ranking-item';
+                    if(index === 0) item.classList.add('top1');
+                    if(index === 1) item.classList.add('top2');
+                    if(index === 2) item.classList.add('top3');
+                    
+                    rankingList.appendChild(item);
+                });
+            }, 1000);
+        });
+
+        // 导航功能 - 跳转到对应链接
+        function navigate(page) {
+            if (CARD_LINKS[page]) {
+                // 在新标签页中打开链接
+                window.open(CARD_LINKS[page], '_blank');
+            } else {
+                alert('该功能暂未配置链接');
+            }
+        }
+
+        // 卡片点击效果
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'translateY(-3px)';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                }, 200);
+            });
+        });
+
+        // 按回车键确认密码
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // 禁止右键菜单
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showSecurityAlert();
+        });
+
+        // 禁止F12开发者工具
+        document.addEventListener('keydown', function(e) {
+            // 禁止F12
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                showSecurityAlert();
+            }
+            
+            // 禁止Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                showSecurityAlert();
+            }
+            
+            // 禁止Ctrl+Shift+J
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                showSecurityAlert();
+            }
+            
+            // 禁止Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                showSecurityAlert();
+            }
+            
+            // 禁止Ctrl+U
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                showSecurityAlert();
+            }
+        });
+
+        // 显示安全警告
+        function showSecurityAlert() {
+            const alert = document.getElementById('securityAlert');
+            alert.style.display = 'block';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 3000);
+        }
+
+        // 防止iframe嵌套
+        if (window.top !== window.self) {
+            window.top.location = window.self.location;
+        }
+
+        // 防止缓存敏感信息
+        window.onbeforeunload = function() {
+            document.getElementById('passwordInput').value = '';
+        };
+
+        // 防止通过控制台访问
+        (function() {
+            var _console = console;
+            Object.defineProperty(window, 'console', {
+                get: function() {
+                    if (arguments[0] === '_command_line_api') {
+                        showSecurityAlert();
+                        throw new Error('控制台访问被禁止');
+                    }
+                    return _console;
+                },
+                set: function(val) {
+                    _console = val;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
