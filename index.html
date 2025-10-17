@@ -241,6 +241,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
+            position: relative;
         }
 
         .card:hover, .card:active {
@@ -257,6 +258,21 @@
         .card-title {
             font-size: 15px;
             font-weight: 500;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff4d4f;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* 密码弹窗样式 */
@@ -333,6 +349,38 @@
         .modal-btn:hover {
             opacity: 0.9;
             transform: translateY(-1px);
+        }
+
+        /* 下载选项样式 */
+        .download-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+
+        .download-option {
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .download-option:hover {
+            background-color: #f0f5ff;
+        }
+
+        .download-option i {
+            margin-right: 8px;
+            color: #4a6cf7;
         }
 
         /* 响应式调整 */
@@ -447,15 +495,32 @@
                 <div class="card-icon"><i class="fas fa-file-alt"></i></div>
                 <div class="card-title">做单文档</div>
             </div>
-           
-            <!-- <div class="card" onclick="navigate('plk')">
+            <div class="card" id="plkCard">
                 <div class="card-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                <div class="card-title">交单PLK网盘文档有下载链接</div>
+                <div class="card-title">PLK网盘</div>
+                <div class="card-badge">交单必装</div>
+                <div class="download-options" id="plkOptions">
+                    <div class="download-option" onclick="window.open('https://example.com/plk1', '_blank')">
+                        <!-- <i class="fas fa-download"></i> PLK网盘链接1 -->
+                    </div>
+                    <div class="download-option" onclick="window.open('https://example.com/plk2', '_blank')">
+                        <!-- <i class="fas fa-download"></i> PLK网盘链接2 -->
+                    </div>
+                </div>
             </div>
-            <div class="card" onclick="navigate('help')">
-                <div class="card-icon"><i class="fas fa-question-circle"></i></div>
-                <div class="card-title">Londing</div>
-            </div> -->
+            <div class="card" id="dongdongCard">
+                <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+                <div class="card-title">动动APP</div>
+                <div class="card-badge">热</div>
+                <div class="download-options" id="dongdongOptions">
+                    <div class="download-option" onclick="window.open('https://example.com/dongdong-ios', '_blank')">
+                        <i class="fab fa-apple"></i> iOS版本下载
+                    </div>
+                    <div class="download-option" onclick="window.open('https://example.com/dongdong-android', '_blank')">
+                        <i class="fab fa-android"></i> 安卓版本下载
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -478,10 +543,8 @@
         // 卡片链接配置 - 在这里设置每个卡片对应的链接
         const CARD_LINKS = {
             'docs': 'hljt.html',      // 做单文档链接
-            'ios': 'https://wwrl.lanzoup.com/ihepK38byy7i',        // IOS下载链接
-            'android': 'https://wwrl.lanzoup.com/iRKeL38c1rpc',// 安卓下载链接
-            'plk': 'https://example.com/plk',        // PLK网盘链接
-            'help': 'https://example.com/help'       // 帮助中心链接
+            'plk': 'https://mypikpak.com/zh-CN/mobile-app',        // PLK网盘链接
+            'dongdong': 'https://www.dongdong.ba/' // 动动APP链接
         };
 
         // 强制刷新页面并清除缓存
@@ -542,7 +605,7 @@
                     const scoreElement = item.querySelector('.score');
                     const currentScore = parseInt(scoreElement.textContent);
                     const newScore = currentScore + Math.floor(Math.random() * 5) + 1;
-                    scoreElement.textContent = newScore + '单';
+                    scoreElement.textContent = newScore + '坑';
                 });
                 
                 const rankingList = document.querySelector('.ranking-list');
@@ -586,6 +649,52 @@
                     this.style.transform = '';
                     this.style.boxShadow = '';
                 }, 200);
+            });
+        });
+
+        // PLK网盘和动动APP卡片点击事件
+        document.getElementById('plkCard').addEventListener('click', function(e) {
+            const options = document.getElementById('plkOptions');
+            const allOptions = document.querySelectorAll('.download-options');
+            
+            // 隐藏所有其他选项
+            allOptions.forEach(opt => {
+                if (opt !== options) opt.style.display = 'none';
+            });
+            
+            // 切换当前选项显示
+            if (options.style.display === 'block') {
+                options.style.display = 'none';
+            } else {
+                options.style.display = 'block';
+            }
+            
+            e.stopPropagation();
+        });
+
+        document.getElementById('dongdongCard').addEventListener('click', function(e) {
+            const options = document.getElementById('dongdongOptions');
+            const allOptions = document.querySelectorAll('.download-options');
+            
+            // 隐藏所有其他选项
+            allOptions.forEach(opt => {
+                if (opt !== options) opt.style.display = 'none';
+            });
+            
+            // 切换当前选项显示
+            if (options.style.display === 'block') {
+                options.style.display = 'none';
+            } else {
+                options.style.display = 'block';
+            }
+            
+            e.stopPropagation();
+        });
+
+        // 点击页面其他地方关闭下载选项
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.download-options').forEach(options => {
+                options.style.display = 'none';
             });
         });
 
@@ -672,8 +781,8 @@
         })();
     </script>
 </body>
-
 </html>
+
 
 
 
