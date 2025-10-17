@@ -5,150 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>互联+山河开工文档</title>
     <style>
-
-               /* 基础样式 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            font-family: 'Arial', sans-serif;
-        }
-        
-        /* 多功能盒子 */
-        .multi-box {
-            border: 2px solid #3498db;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            background-color: #f8f9fa;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .multi-box:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            transform: translateY(-5px);
-        }
-        
-        .multi-box h2 {
-            color: #2c3e50;
-            border-bottom: 2px dashed #3498db;
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-        
-        /* 图片样式 */
-        .box-image {
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-            border-radius: 8px;
-            margin: 15px 0;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-        
-        .box-image:hover {
-            transform: scale(1.02);
-        }
-        
-        /* 视频容器 */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 比例 */
-            height: 0;
-            overflow: hidden;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .multi-box {
-                padding: 15px;
-            }
-            
-            .box-image {
-                max-width: 100%;
-            }
-        }
-        
-        /* 其他内容样式 */
-        .box-content {
-            line-height: 1.6;
-            color: #34495e;
-        }
-        
-        /* 悬浮提示 */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            border-bottom: 1px dotted #3498db;
-            cursor: help;
-        }
-        
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        /* 按钮样式 */
-        .box-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 10px 0;
-            transition: background-color 0.3s;
-        }
-        
-        .box-button:hover {
-            background-color: #2980b9;
-        }
-
-video {
-            max-width: 100%;
-            height: auto;
-            margin: 20px 0;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .video-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-
-
         /* 基础重置 */
         * {
             margin: 0;
@@ -372,7 +228,165 @@ video {
             color: #7f8c8d;
         }
         
+        /* 视频样式 */
+        video {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 多功能盒子 */
+        .multi-box {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .multi-box:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .multi-box h2 {
+            color: #2c3e50;
+            border-bottom: 2px dashed #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        /* 图片样式 */
+        .box-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .box-image:hover {
+            transform: scale(1.02);
+        }
+        
+        /* 视频容器 */
+        .multi-box .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            height: 0;
+            overflow: hidden;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .multi-box .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* 悬浮提示 */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #3498db;
+            cursor: help;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* 按钮样式 */
+        .box-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+        
+        .box-button:hover {
+            background-color: #2980b9;
+        }
+        
+        /* 链接样式 */
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
         /* 响应式调整 */
+        @media (max-width: 768px) {
+            .multi-box {
+                padding: 15px;
+            }
+            
+            .box-image {
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            h3 {
+                font-size: 1.1rem;
+            }
+            
+            .video-container {
+                padding: 10px;
+            }
+            
+            video {
+                margin: 10px 0;
+            }
+        }
+        
         @media (min-width: 768px) {
             .container {
                 max-width: 750px;
@@ -489,7 +503,7 @@ video {
                 <li><a href="#section2">第二部分：准备工作</a></li>
                 <li><a href="#section3">第三部分：开工/结算</a></li>
                 <li><a href="#section4">第四部分：推荐结算方式</a></li>
-                
+                <li><a href="#section5">第五部分：做单小技巧汇总</a></li>
             </ul>
         </div>
         
@@ -497,12 +511,7 @@ video {
             <h2 id="section1">第一部分：必读</h2>
             <p>文档根据盘口规则会略微有改动，为避免开工扣钱，请仔细阅读</p>
             
-            <!-- <h3>收益构成</h3> -->
-            <!-- <p>以互联+桂林奥特曼为例，代号为奥特曼，举个栗子</p>
             <ul>
-                
-                <li>奥特曼日*24小时盖了500个坑，那么他按工作流程交付工作视频/照片后，奥特曼获得了佣金￥500R</li>
-                <li>奥特曼的收入并没有限制，完全是多劳多得的佣金构成，看个人能力，当然，最低保底是要完成日100坑的，这是硬性规定</li> -->
                 <li>注意，做单人员所在地必须为市级单位，某某市区，市级以下单位是没有办法做单的，所以假如孤狼在某某县，某某村流量较少区域，那么很遗憾就没有办法与我方合作开展工作</li>
                 <li>规则：
 地点:
@@ -530,7 +539,7 @@ video {
                 </tr>
                 <tr>
                     <td>印章</td>
-                    <td>1个光敏刻章45*65</td>
+                    <td>1个光敏刻章45 * 65</td>
                     <td>等不及的自己刻or30元找群主包邮</td>
                 </tr>
                 <tr>
@@ -549,8 +558,8 @@ video {
                     <td>自己买</td>
                 </tr>
             </table>
-            <img src="photo_2025-10-17_09-08-33.jpg" alt="图片描述">
-        <p class="caption">印章示例，最新盘口样例</p>
+            <img src="photo_2025-10-17_09-08-33.jpg" alt="印章示例">
+            <p class="caption">印章示例，最新盘口样例</p>
             
             <h3>准备完毕</h3>
             <p>物料准备完毕并核对内容正确后我们的奥特曼，盖章小王子就可以开始寻找厕所出发赚钱了</p>
@@ -570,30 +579,29 @@ video {
             <h4>参考视频</h4>
             <p>请观看以下标准视频(开工视频中要包含测水视频，用点水涂抹在印好的地方用手擦拭，无此动作不合格)：</p>
             <div class="video-container">
-        <h4>代号互联+奥特曼交付的标准视频-3个视频，第一个开工视频，（测水动作自行录入）第二个做单视频，第三个收工视频，开工视频和收工视频一天拍一次就行，除非你结束了工作，否则不要关闭动动app👇</h4>
+                <h4>代号互联+奥特曼交付的标准视频-3个视频，第一个开工视频，（测水动作自行录入）第二个做单视频，第三个收工视频，开工视频和收工视频一天拍一次就行，除非你结束了工作，否则不要关闭动动app👇</h4>
 
-         <!-- 开工视频播放 -->
-        <video width="640" height="360" controls>
-            <source src="IMG_2372.MP4" type="video/mp4">
-            <source src="IMG_2372.MP4" type="video/webm">
-            您的浏览器不支持HTML5视频标签。
-        </video>
-        
-        <!-- 做单视频播放 -->
-        <video width="640" height="360" controls>
-            <source src="IMG_2468.MP4" type="video/mp4">
-            <source src="IMG_2468.MP4" type="video/webm">
-            您的浏览器不支持HTML5视频标签。
-        </video>
+                <!-- 开工视频播放 -->
+                <video width="100%" controls>
+                    <source src="IMG_2372.MP4" type="video/mp4">
+                    <source src="IMG_2372.MP4" type="video/webm">
+                    您的浏览器不支持HTML5视频标签。
+                </video>
+                
+                <!-- 做单视频播放 -->
+                <video width="100%" controls>
+                    <source src="IMG_2468.MP4" type="video/mp4">
+                    <source src="IMG_2468.MP4" type="video/webm">
+                    您的浏览器不支持HTML5视频标签。
+                </video>
 
-         <!-- 收工视频播放 -->
-        <video width="640" height="360" controls>
-            <source src="IMG_2371.MP4" type="video/mp4">
-            <source src="IMG_2371.MP4" type="video/webm">
-            您的浏览器不支持HTML5视频标签。
-        </video>
-        
-    </div>
+                <!-- 收工视频播放 -->
+                <video width="100%" controls>
+                    <source src="IMG_2371.MP4" type="video/mp4">
+                    <source src="IMG_2371.MP4" type="video/webm">
+                    您的浏览器不支持HTML5视频标签。
+                </video>
+            </div>
             <pre><code>开工中请尽量一个视频包含更多的坑位，保持视频的连续完整性</code></pre>
             
             <h4>第二步：小伙伴工作一天辛苦了，请下载pikpak网盘，新建一个当天的文件夹，把当天的视频从开工-结束都以例如3-5-12，6-7-29，这种标题上传，第一个数字代表第几个视频，第二个数字代表视频的数量，第三个数字代表加之前总量的总数，分享设置链接给管理员，等待审核结算薪水</h4>
@@ -612,73 +620,64 @@ video {
             
             <h4>推荐欧意</h4>
             <p>留好收款地址复制链接和交单链接一起甩过来，备注好网络，例如tron</p>
-            <pre><code>
-  
-</code></pre>
-
-<div class="warning">
+            
+            <div class="warning">
                 <strong>注意：</strong> 开工必装软件：1动动app-2水印相机-（应用商店下载）3pikpak网盘 ，1-3提供了下载地址，水印相机自己去应用商店装-
             </div>
-            <a href="https://www.dongdong.ba/">点击下载动动</a>
-            <a href="https://mypikpak.com/zh-CN/mobile-app">点击下载pikpak网盘</a>
+            <p><a href="https://www.dongdong.ba/" target="_blank">点击下载动动</a></p>
+            <p><a href="https://mypikpak.com/zh-CN/mobile-app" target="_blank">点击下载pikpak网盘</a></p>
             
-            <!-- <h3>插件扩展</h3>
-            <p>安装插件以扩展功能：</p>
-            <pre><code>tutorial plugin install advanced-features</code></pre>
-            
-            <div class="danger">
-                <strong>警告：</strong> 某些高级功能可能会影响系统稳定性，请谨慎使用。
-            </div>
-            
-            <h2 id="section5">第五部分：常见问题</h2>
-            <p>以下是一些常见问题及其解决方案。</p>
-            
-            <h3>问题1：安装失败</h3>
-            <p><strong>解决方案：</strong> 检查网络连接并确保有足够的存储空间。</p>
-            
-            <h3>问题2：运行错误</h3>
-            <p><strong>解决方案：</strong> 确保所有依赖项已正确安装。</p>
-            
-            <h3>问题3：性能问题</h3>
-            <p><strong>解决方案：</strong> 关闭不必要的插件或升级硬件配置。</p> -->
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="multi-box">
-            <h2>做单小技巧汇总，必读</h2>
-            
-            <div class="box-content">
-                <p>这里包含找厕所教程，怎么添加印油，怎么设置水印相机，印章的位置盖哪里，不掌握瞎几把盖，录，会扣钱，必看必会：</p>
+            <h2 id="section5">第五部分：做单小技巧汇总</h2>
+            <div class="multi-box">
+                <h2>做单小技巧汇总，必读</h2>
                 
-                <ul>
-                    <li>不掌握不按文档开工不要问为什么会扣钱！！！</li>
-                    <li>不掌握不按文档开工不要问为什么会扣钱！！！</li>
-                    <li>不掌握不按文档开工不要问为什么会扣钱！！！</li>
-                    <li>阴影效果：增强立体感</li>
+                <div class="box-content">
+                    <p>这里包含找厕所教程，怎么添加印油，怎么设置水印相机，印章的位置盖哪里，不掌握瞎几把盖，录，会扣钱，必看必会：</p>
                     
-                </ul>
+                    <ul>
+                        <li>不掌握不按文档开工不要问为什么会扣钱！！！</li>
+                        <li>不掌握不按文档开工不要问为什么会扣钱！！！</li>
+                        <li>不掌握不按文档开工不要问为什么会扣钱！！！</li>
+                    </ul>
+                </div>
+                
+                <h3>印油添加方法</h3>
+                <img src="jyy.jpg" alt="印油添加示例" class="box-image">
+                
+                <h3>水印相机设置</h3>
+                <img src="sy1.jpg" alt="水印相机设置1" class="box-image">
+                <img src="sy2.jpg" alt="水印相机设置2" class="box-image">
+                <img src="sy3.jpg" alt="水印相机设置3" class="box-image">
+                <img src="sy4.jpg" alt="水印相机设置4" class="box-image">
+                <img src="sy5.jpg" alt="水印相机设置5" class="box-image">
+                <img src="sy6.jpg" alt="水印相机设置6" class="box-image">
+                
+                <h3>找厕所教程</h3>
+                <div class="video-container">
+                    <video width="100%" controls>
+                        <source src="zcs.mp4" type="video/mp4">
+                        您的浏览器不支持HTML5视频标签。
+                    </video>
+                </div>
+                
+                <h3>新手必看教程</h3>
+                <div class="video-container">
+                    <video width="100%" controls>
+                        <source src="xbc.mp4" type="video/mp4">
+                        您的浏览器不支持HTML5视频标签。
+                    </video>
+                </div>
+                
+                <h3>印油使用教程</h3>
+                <div class="video-container">
+                    <video width="100%" controls>
+                        <source src="jyy.mp4" type="video/mp4">
+                        您的浏览器不支持HTML5视频标签。
+                    </video>
+                </div>
+                
+                <p><a href="#" class="box-button">必须掌握</a></p>
             </div>
-            
-            <img src="jyy.jpg" alt="示例图片" class="box-image">
-            <img src="sy1.jpg" alt="示例图片" class="box-image">
-            <img src="sy2.jpg" alt="示例图片" class="box-image">
-            <img src="sy3.jpg" alt="示例图片" class="box-image">
-            <img src="sy4.jpg" alt="示例图片" class="box-image">
-            <img src="sy5.jpg" alt="示例图片" class="box-image">
-            <img src="sy6.jpg" alt="示例图片" class="box-image">
-            
-            <div class="video-container">
-                <iframe src="zcs.mp4" allowfullscreen></iframe>
-            </div>
-             <div class="video-container">
-                <iframe src="xbc.mp4" allowfullscreen></iframe>
-            </div>
-            <div class="video-container">
-                <iframe src="jyy.mp4" allowfullscreen></iframe>
-            </div>
-            
-            <a href="#" class="box-button">必须掌握</a>
         </div>
     </div>
     
@@ -688,8 +687,26 @@ video {
             <p>如有问题，请发邮件-hulianjt@hotmail.com</p>
         </div>
     </footer>
+    
+    <script>
+        // 防止页面自动跳转
+        if (window.location.hash === '#') {
+            window.location.hash = '';
+        }
+        
+        // 移动端优化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 确保视频在移动端正确显示
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+            });
+        });
+    </script>
 </body>
 </html>
+
 
 
 
