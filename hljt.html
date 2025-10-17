@@ -6,6 +6,134 @@
     <title>互联+山河开工文档</title>
     <style>
 
+               /* 基础样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        /* 多功能盒子 */
+        .multi-box {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .multi-box:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .multi-box h2 {
+            color: #2c3e50;
+            border-bottom: 2px dashed #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        /* 图片样式 */
+        .box-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .box-image:hover {
+            transform: scale(1.02);
+        }
+        
+        /* 视频容器 */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            height: 0;
+            overflow: hidden;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .multi-box {
+                padding: 15px;
+            }
+            
+            .box-image {
+                max-width: 100%;
+            }
+        }
+        
+        /* 其他内容样式 */
+        .box-content {
+            line-height: 1.6;
+            color: #34495e;
+        }
+        
+        /* 悬浮提示 */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #3498db;
+            cursor: help;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* 按钮样式 */
+        .box-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+        
+        .box-button:hover {
+            background-color: #2980b9;
+        }
+
 video {
             max-width: 100%;
             height: auto;
@@ -515,6 +643,41 @@ video {
             <p><strong>解决方案：</strong> 关闭不必要的插件或升级硬件配置。</p> -->
         </div>
     </div>
+
+    <div class="container">
+        <div class="multi-box">
+            <h2>做单小技巧汇总，必读</h2>
+            
+            <div class="box-content">
+                <p>这里包含找厕所教程，怎么添加印油，怎么设置水印相机，印章的位置盖哪里，不掌握瞎几把盖，录，会扣钱，必看必会：</p>
+                
+                <ul>
+                    <li>不掌握不按文档开工不要问为什么会扣钱！！！</li>
+                    <li>不掌握不按文档开工不要问为什么会扣钱！！！</li>
+                    <li>不掌握不按文档开工不要问为什么会扣钱！！！</li>
+                    <li>阴影效果：增强立体感</li>
+                    
+                </ul>
+            </div>
+            
+            <img src="https://via.placeholder.com/500x300" alt="示例图片" class="box-image">
+            <img src="https://via.placeholder.com/500x300" alt="示例图片" class="box-image">
+            <img src="https://via.placeholder.com/500x300" alt="示例图片" class="box-image">
+            <img src="https://via.placeholder.com/500x300" alt="示例图片" class="box-image">
+            <img src="https://via.placeholder.com/500x300" alt="示例图片" class="box-image">
+            <img src="https://via.placeholder.com/500x300" alt="示例图片" class="box-image">
+            <img src="https://via.placeholder.com/500x300" alt="示例图片" class="box-image">
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+             <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+            
+            <a href="#" class="box-button">必须掌握</a>
+        </div>
+    </div>
     
     <footer>
         <div class="container">
@@ -524,6 +687,7 @@ video {
     </footer>
 </body>
 </html>
+
 
 
 
